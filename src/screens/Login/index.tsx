@@ -1,23 +1,23 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import LinearGradient from 'react-native-linear-gradient';
 import {Platform, KeyboardAvoidingView} from 'react-native';
 
 import InputText from '../../components/TextInput';
+import InputSelect from '../../components/SelectInput';
+import Button from '../../components/Button';
+
+import MailIcon from '../../assets/icons/mail.svg';
+import KeyIcon from '../../assets/icons/key.svg';
+import EyeIcon from '../../assets/icons/eye.svg';
+import LogoIcon from '../../assets/icons/logo.svg';
 
 import {
   Container,
   LoginCard,
-  Logo,
   LoginContainer,
   LogoContainer,
   OptionAccountContainer,
   OptionAccountButton,
   OptionAccountText,
-  Division,
-  ButtonContainer,
-  Button,
-  TextButton,
   ForgotPasswordContainer,
   ForgotPasswordText,
 } from './styles';
@@ -33,57 +33,108 @@ const Login: React.FC = () => {
 
   return (
     <Container source={require('../../assets/img/background.jpg')}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-        enabled>
-        <LogoContainer>
-          <Logo source={require('../../assets/img/logo.png')} />
-        </LogoContainer>
+      {selectedLoginAccount ? (
+        <>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+            enabled>
+            <LogoContainer>
+              <LogoIcon />
+            </LogoContainer>
 
-        <OptionAccountContainer>
-          <OptionAccountButton
-            selected={selectedLoginAccount}
-            onPress={handleOptionAccount}>
-            <OptionAccountText selected={selectedLoginAccount}>
-              Já possuo conta
-            </OptionAccountText>
-          </OptionAccountButton>
+            <OptionAccountContainer>
+              <OptionAccountButton
+                selected={selectedLoginAccount}
+                onPress={handleOptionAccount}>
+                <OptionAccountText selected={selectedLoginAccount}>
+                  Já possuo conta
+                </OptionAccountText>
+              </OptionAccountButton>
 
-          <OptionAccountButton
-            selected={selectedNewAccount}
-            onPress={handleOptionAccount}>
-            <OptionAccountText selected={selectedNewAccount}>
-              Nova conta
-            </OptionAccountText>
-          </OptionAccountButton>
-        </OptionAccountContainer>
+              <OptionAccountButton
+                selected={selectedNewAccount}
+                onPress={handleOptionAccount}>
+                <OptionAccountText selected={selectedNewAccount}>
+                  Nova conta
+                </OptionAccountText>
+              </OptionAccountButton>
+            </OptionAccountContainer>
 
-        <LoginContainer>
-          <LoginCard>
-            <InputText name="email" placeholder="Email" />
-            <Division />
-            <InputText name="password" placeholder="Senha" />
-          </LoginCard>
-          <ButtonContainer>
-            <LinearGradient
-              colors={['rgba(12, 233, 106, 0.99)', '#197C43']}
-              style={{
-                flex: 1,
-                borderRadius: 5,
-                width: '100%',
-                height: '100%',
-                position: 'absolute',
-              }}
-            />
-            <Button onPress={() => {}}>
-              <TextButton>Entrar</TextButton>
-            </Button>
-          </ButtonContainer>
-        </LoginContainer>
-      </KeyboardAvoidingView>
-      <ForgotPasswordContainer onPress={() => {}}>
-        <ForgotPasswordText>Esqueci a senha</ForgotPasswordText>
-      </ForgotPasswordContainer>
+            <LoginContainer>
+              <LoginCard>
+                <InputText
+                  Icon={MailIcon}
+                  first={true}
+                  placeholder="Email"
+                  textContentType="emailAddress"
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  autoCompleteType="email"
+                  returnKeyType="next"
+                />
+
+                <InputText
+                  first={false}
+                  Icon={KeyIcon}
+                  PasswordIcon={EyeIcon}
+                  placeholder="Senha"
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  autoCompleteType="password"
+                  returnKeyType="send"
+                  secureTextEntry={true}
+                />
+              </LoginCard>
+
+              <Button text="Entrar" onPress={() => console.log('entrar')} />
+            </LoginContainer>
+          </KeyboardAvoidingView>
+          <ForgotPasswordContainer onPress={() => {}}>
+            <ForgotPasswordText>Esqueci a senha</ForgotPasswordText>
+          </ForgotPasswordContainer>
+        </>
+      ) : (
+        <>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+            enabled>
+            <LogoContainer>
+              <LogoIcon />
+            </LogoContainer>
+
+            <OptionAccountContainer>
+              <OptionAccountButton
+                selected={selectedLoginAccount}
+                onPress={handleOptionAccount}>
+                <OptionAccountText selected={selectedLoginAccount}>
+                  Já possuo conta
+                </OptionAccountText>
+              </OptionAccountButton>
+
+              <OptionAccountButton
+                selected={selectedNewAccount}
+                onPress={handleOptionAccount}>
+                <OptionAccountText selected={selectedNewAccount}>
+                  Nova conta
+                </OptionAccountText>
+              </OptionAccountButton>
+            </OptionAccountContainer>
+
+            <LoginContainer>
+              <LoginCard>
+                <InputSelect first={true} label="Pessoa Física" />
+                <InputSelect first={false} label="ONG" />
+              </LoginCard>
+
+              <Button
+                text="Confirmar"
+                onPress={() => console.log('confirmar')}
+              />
+            </LoginContainer>
+          </KeyboardAvoidingView>
+        </>
+      )}
     </Container>
   );
 };

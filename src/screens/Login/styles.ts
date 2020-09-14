@@ -1,6 +1,5 @@
 import styled from 'styled-components/native';
-import {Dimensions, StyleSheet} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import {Dimensions} from 'react-native';
 
 interface PropsSelected {
   selected: Boolean;
@@ -61,14 +60,9 @@ export const LoginContainer = styled.View`
 `;
 
 export const LogoContainer = styled.View`
-  /* margin-top: 4px; */
+  margin-top: 4px;
   align-items: center;
   justify-content: center;
-`;
-
-export const Logo = styled.Image`
-  width: ${width / 2.5}px;
-  height: ${width / 2.5}px;
 `;
 
 export const LoginCard = styled.View`
@@ -83,45 +77,6 @@ export const LoginCard = styled.View`
   justify-content: space-between;
 
   elevation: 10;
-`;
-
-export const Division = styled.View`
-  height: ${StyleSheet.hairlineWidth}px;
-  width: 100%;
-
-  background: #828282;
-`;
-
-export const ButtonContainer = styled.View`
-  position: absolute;
-
-  top: 90%;
-  width: 28%;
-  height: 28%;
-
-  justify-content: center;
-  align-items: center;
-
-  elevation: 10;
-`;
-
-export const Button = styled.TouchableOpacity`
-  position: relative;
-
-  background: transparent;
-
-  width: 100%;
-  height: 100%;
-
-  justify-content: center;
-  align-items: center;
-`;
-
-export const TextButton = styled.Text`
-  font-size: 13px;
-  font-family: 'FredokaOne-Regular';
-
-  color: #f2f2f2;
 `;
 
 export const ForgotPasswordContainer = styled.TouchableOpacity`

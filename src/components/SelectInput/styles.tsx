@@ -18,15 +18,16 @@ export const Container = styled.View`
     !first ? '#828282' : 'transparent'};
 `;
 
-export const Input = styled.TextInput`
+export const Select = styled.View`
   height: 100%;
   flex: 1;
-  /* justify-content: space-between; */
+  justify-content: center;
+  /* align-items: stretch; */
   margin-left: 10px;
+`;
 
+export const SelectLabel = styled.Text`
   font-family: 'FredokaOne-Regular';
   font-size: 13px;
   line-height: 16px;
 `;
-
-export const ViewPassword = styled.TouchableOpacity``;
