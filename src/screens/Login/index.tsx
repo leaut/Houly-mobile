@@ -27,8 +27,19 @@ const Login: React.FC = () => {
   const [selectedNewAccount, setSelectedNewAccount] = useState(false);
 
   function handleOptionAccount() {
-    setSelectedLoginAccount((prevState) => !prevState);
-    setSelectedNewAccount((prevState) => !prevState);
+    if (selectedLoginAccount) {
+      return
+    }
+    setSelectedLoginAccount(true);
+    setSelectedNewAccount(false);
+  }
+  
+  function handleOptionAccount2(){
+    if (selectedNewAccount) {      
+      return
+    }
+    setSelectedNewAccount(true);
+    setSelectedLoginAccount(false);
   }
 
   return (
@@ -53,7 +64,7 @@ const Login: React.FC = () => {
 
               <OptionAccountButton
                 selected={selectedNewAccount}
-                onPress={handleOptionAccount}>
+                onPress={handleOptionAccount2}>
                 <OptionAccountText selected={selectedNewAccount}>
                   Nova conta
                 </OptionAccountText>
@@ -114,7 +125,7 @@ const Login: React.FC = () => {
 
               <OptionAccountButton
                 selected={selectedNewAccount}
-                onPress={handleOptionAccount}>
+                onPress={handleOptionAccount2}>
                 <OptionAccountText selected={selectedNewAccount}>
                   Nova conta
                 </OptionAccountText>
@@ -133,6 +144,9 @@ const Login: React.FC = () => {
               />
             </LoginContainer>
           </KeyboardAvoidingView>
+          <ForgotPasswordContainer onPress={() => {}}>
+            <ForgotPasswordText></ForgotPasswordText>
+          </ForgotPasswordContainer>
         </>
       )}
     </Container>
