@@ -19,10 +19,11 @@ export const Container = styled.View`
 `;
 
 export const Select = styled.View`
-  height: 100%;
+  /* height: 100%; */
   flex: 1;
-  justify-content: center;
-  /* align-items: stretch; */
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   margin-left: 10px;
 `;
 
@@ -30,4 +31,6 @@ export const SelectLabel = styled.Text`
   font-family: 'FredokaOne-Regular';
   font-size: 13px;
   line-height: 16px;
+
+  color: #828282;
 `;

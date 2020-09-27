@@ -1,4 +1,5 @@
 import React from 'react';
+import {View} from 'react-native';
 
 import {Props} from './index.d';
 
@@ -9,6 +10,15 @@ const SelectInput: React.FC<Props> = ({first, label}) => {
     <Container first={first}>
       <Select>
         <SelectLabel>{label}</SelectLabel>
+
+        <View
+          style={{
+            backgroundColor: '#828282',
+            borderRadius: 100,
+            width: 20,
+            height: 20,
+          }}
+        />
       </Select>
     </Container>
   );

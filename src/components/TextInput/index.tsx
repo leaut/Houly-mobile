@@ -1,12 +1,15 @@
-import React, {useState, useEffect} from 'react';
+import React, {forwardRef, useState} from 'react';
+import {TextInputProps, TouchableOpacity} from 'react-native';
 
 import {Input, Container} from './styles';
 
 import {Props} from './index.d';
-import {TouchableOpacity} from 'react-native';
 
-const TextInput: React.FC<Props> = ({Icon, PasswordIcon, first, ...rest}) => {
-  const [secureText, setSecureText] = useState(false);
+const TextInput: React.ForwardRefRenderFunction<TextInputProps, Props> = (
+  {Icon, PasswordIcon, first, ...rest},
+  ref,
+) => {
+  const [secureText, setSecureText] = useState(true);
 
   const handlePasswordView = () => {
     setSecureText((state) => !state);
@@ -15,7 +18,8 @@ const TextInput: React.FC<Props> = ({Icon, PasswordIcon, first, ...rest}) => {
   return (
     <Container first={first}>
       <Icon width={24} height={24} />
-      <Input {...rest} secureTextEntry={secureText} />
+      <Input ref={ref} {...rest} secureTextEntry={secureText} />
+
       {PasswordIcon ? (
         <TouchableOpacity onPress={handlePasswordView}>
           <PasswordIcon width={24} height={24} />
@@ -25,4 +29,4 @@ const TextInput: React.FC<Props> = ({Icon, PasswordIcon, first, ...rest}) => {
   );
 };
 
-export default TextInput;
+export default forwardRef(TextInput);

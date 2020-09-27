@@ -1,9 +1,13 @@
-import React, {useState} from 'react';
-import {Platform, KeyboardAvoidingView} from 'react-native';
+import React, {useState, useRef, useCallback} from 'react';
+import {Platform, KeyboardAvoidingView, TextInputProps} from 'react-native';
+
+import api from '../../services/api';
 
 import InputText from '../../components/TextInput';
 import InputSelect from '../../components/SelectInput';
 import Button from '../../components/Button';
+
+import validationSignIn from '../../validations/SignIn';
 
 import MailIcon from '../../assets/icons/mail.svg';
 import KeyIcon from '../../assets/icons/key.svg';
@@ -26,18 +30,33 @@ const Login: React.FC = () => {
   const [selectedLoginAccount, setSelectedLoginAccount] = useState(true);
   const [selectedNewAccount, setSelectedNewAccount] = useState(false);
 
+  const EmailInputRef = useRef<TextInputProps>(null);
+  const PasswordInputRef = useRef<TextInputProps>(null);
+
+  const handleSubmitSignIn = async () => {
+    const email = EmailInputRef.current?.value;
+    const password = PasswordInputRef.current?.value;
+
+    console.log({email, password});
+
+    // try {
+    //   await validationSignIn.validate({email, password});
+    // } catch (error) {}
+  };
+
   function handleOptionAccount() {
     if (selectedLoginAccount) {
-      return
+      return;
     }
     setSelectedLoginAccount(true);
     setSelectedNewAccount(false);
   }
-  
-  function handleOptionAccount2(){
-    if (selectedNewAccount) {      
-      return
+
+  function handleOptionAccount2() {
+    if (selectedNewAccount) {
+      return;
     }
+
     setSelectedNewAccount(true);
     setSelectedLoginAccount(false);
   }
@@ -83,6 +102,7 @@ const Login: React.FC = () => {
                   autoCorrect={false}
                   autoCompleteType="email"
                   returnKeyType="next"
+                  ref={EmailInputRef}
                 />
 
                 <InputText
@@ -95,10 +115,11 @@ const Login: React.FC = () => {
                   autoCompleteType="password"
                   returnKeyType="send"
                   secureTextEntry={true}
+                  ref={PasswordInputRef}
                 />
               </LoginCard>
 
-              <Button text="Entrar" onPress={() => console.log('entrar')} />
+              <Button text="Entrar" onPress={handleSubmitSignIn} />
             </LoginContainer>
           </KeyboardAvoidingView>
           <ForgotPasswordContainer onPress={() => {}}>
@@ -145,7 +166,7 @@ const Login: React.FC = () => {
             </LoginContainer>
           </KeyboardAvoidingView>
           <ForgotPasswordContainer onPress={() => {}}>
-            <ForgotPasswordText></ForgotPasswordText>
+            <ForgotPasswordText />
           </ForgotPasswordContainer>
         </>
       )}
