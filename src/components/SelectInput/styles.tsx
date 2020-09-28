@@ -29,7 +29,7 @@ export const Select = styled.View`
 
 export const SelectLabel = styled.Text`
   font-family: 'FredokaOne-Regular';
-  font-size: 13px;
+  font-size: 16px;
   line-height: 16px;
 
   color: #828282;
