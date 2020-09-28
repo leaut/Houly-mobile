@@ -33,16 +33,16 @@ const Login: React.FC = () => {
   const EmailInputRef = useRef<TextInputProps>(null);
   const PasswordInputRef = useRef<TextInputProps>(null);
 
-  const handleSubmitSignIn = async () => {
+  const handleSubmitSignIn = useCallback(() => {
     const email = EmailInputRef.current?.value;
-    const password = PasswordInputRef.current?.value;
+    // const password = PasswordInputRef.current?.value;
 
-    console.log({email, password});
+    console.log({email});
 
     // try {
     //   await validationSignIn.validate({email, password});
     // } catch (error) {}
-  };
+  }, []);
 
   function handleOptionAccount() {
     if (selectedLoginAccount) {
