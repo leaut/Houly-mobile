@@ -30,6 +30,9 @@ const Login: React.FC = () => {
   const [selectedLoginAccount, setSelectedLoginAccount] = useState(true);
   const [selectedNewAccount, setSelectedNewAccount] = useState(false);
 
+  const [selectedPhysicalPerson, setSelectedPhysicalPerson] = useState('#000')
+  const [selectedOng, setSelectedOng] = useState('transparent')
+
   const EmailInputRef = useRef<TextInputProps>(null);
   const PasswordInputRef = useRef<TextInputProps>(null);
 
@@ -56,10 +59,23 @@ const Login: React.FC = () => {
     if (selectedNewAccount) {
       return;
     }
-
     setSelectedNewAccount(true);
     setSelectedLoginAccount(false);
   }
+
+
+  function handleInputRadioUser() {
+    if (selectedOng === 'transparent' && selectedPhysicalPerson === '#000') {
+      setSelectedOng('#000')
+      setSelectedPhysicalPerson('transparent')
+    }
+
+    if (selectedOng === '#000' && selectedPhysicalPerson === 'transparent') {
+      setSelectedOng('transparent')
+      setSelectedPhysicalPerson('#000')
+    }
+  }
+
 
   return (
     <Container source={require('../../assets/img/background.jpg')}>
@@ -155,8 +171,8 @@ const Login: React.FC = () => {
 
             <LoginContainer>
               <LoginCard>
-                <InputSelect first={true} label="Pessoa Física" />
-                <InputSelect first={false} label="ONG" />
+                <InputSelect first={true} label="Pessoa Física" color={selectedPhysicalPerson} callback={handleInputRadioUser} />
+                <InputSelect first={false} label="ONG" color={selectedOng} callback={handleInputRadioUser}/>
               </LoginCard>
 
               <Button
